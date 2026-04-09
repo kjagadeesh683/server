@@ -1,25 +1,18 @@
-package com.mcp.server;
+package com.project.MCP.Server;
 
-import com.mcp.server.repository.ProductRepository;
-import com.mcp.server.service.ProductService;
+import com.project.MCP.Server.service.ProductService;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
-import org.springframework.boot.Banner;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class ServerApplication {
+public class McpServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication app = new SpringApplication(ServerApplication.class);
-		app.setLogStartupInfo(false);
-		app.setBannerMode(Banner.Mode.OFF);
-
-		ConfigurableApplicationContext context = app.run(args);
+		ConfigurableApplicationContext context = SpringApplication.run(McpServerApplication.class, args);
 
 		// Add a shutdown hook to gracefully close the application context on JVM shutdown
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {

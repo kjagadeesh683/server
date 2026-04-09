@@ -1,6 +1,6 @@
-package com.mcp.server.repository;
+package com.project.MCP.Server.repository;
 
-import com.mcp.server.entity.Product;
+import com.project.MCP.Server.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

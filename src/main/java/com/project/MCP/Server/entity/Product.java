@@ -1,4 +1,4 @@
-package com.mcp.server.entity;
+package com.project.MCP.Server.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

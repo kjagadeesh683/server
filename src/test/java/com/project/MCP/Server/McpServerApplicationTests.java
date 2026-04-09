@@ -1,10 +1,10 @@
-package com.mcp.server;
+package com.project.MCP.Server;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ServerApplicationTests {
+class McpServerApplicationTests {
 
 	@Test
 	void contextLoads() {

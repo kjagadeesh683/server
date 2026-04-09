@@ -1,7 +1,7 @@
-package com.mcp.server.config;
+package com.project.MCP.Server.config;
 
-import com.mcp.server.entity.Product;
-import com.mcp.server.repository.ProductRepository;
+import com.project.MCP.Server.entity.Product;
+import com.project.MCP.Server.repository.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

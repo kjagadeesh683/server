@@ -1,7 +1,7 @@
-package com.mcp.server.service;
+package com.project.MCP.Server.service;
 
-import com.mcp.server.entity.Product;
-import com.mcp.server.repository.ProductRepository;
+import com.project.MCP.Server.entity.Product;
+import com.project.MCP.Server.repository.ProductRepository;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
