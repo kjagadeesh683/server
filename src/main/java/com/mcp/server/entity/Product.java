@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "products")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Product {
 
     @Id
@@ -20,4 +18,13 @@ public class Product {
     private String category;
     private Double price;
     private int stock;
+
+    public Product() {}
+
+    public Product(String name, String category, Double price, int stock) {
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.stock = stock;
+    }
 }
