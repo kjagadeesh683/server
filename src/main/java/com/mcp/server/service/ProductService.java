@@ -107,4 +107,34 @@ public class ProductService {
                 savedProduct.getId(), savedProduct.getName(), savedProduct.getCategory(),
                 savedProduct.getPrice(), savedProduct.getStock());
     }
+
+    @Tool(description = "Updates an existing product's information in the inventory. " +
+            "Require the productId and new values for name, category, price, and stock. " +
+            "ALl fields are required even if only updating one field.")
+    public String updateProductStock(long id, String name, String category, double price, int stock) {
+        return productRepository.findById(id)
+                .map(product -> {
+                    product.setName(name);
+                    product.setCategory(category);
+                    product.setPrice(price);
+                    product.setStock(stock);
+                    Product updatedProduct = productRepository.save(product);
+
+                    return String.format("Product updated successfully. " +
+                            "ID: %d, Name: %s, Category: %s, Price: %.2f, Stock: %d units",
+                            updatedProduct.getId(), updatedProduct.getName(), updatedProduct.getCategory(),
+                            updatedProduct.getPrice(), updatedProduct.getStock());
+                }).orElse(String.format("Error: Product with ID %d not found", id));
+    }
+
+    @Tool(description = "Deletes a product from the inventory by it's ID. " +
+            "Returns confirmation of deletion or error if the product is not found.")
+    public String deleteProduct(long id) {
+        return productRepository.findById(id)
+                .map(product -> {
+                    productRepository.delete(product);
+                    return String.format("Product '%s' with ID %d deleted successfully",
+                            product.getName(), product.getId());
+                }).orElse(String.format("Error: Product with ID %d not found", id));
+    }
 }
