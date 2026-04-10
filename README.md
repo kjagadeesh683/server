@@ -1,8 +1,8 @@
-Spring AI MCP Server
+**Spring AI MCP Server**
 
 A demo project showcasing how to build an MCP (Model Context Protocol) Server using Spring AI. This project demonstrates integrating an AI assistant with a product inventory system through the MCP protocol.
 
-Table of Contents
+**Table of Contents**
 
 * Overview
 * Architecture Flow
@@ -24,6 +24,7 @@ What is MCP?
 * Access contextual data from various sources
 * Interact with real-world systems securely
 
+
 **Key Components**
 
 | Component       | Description                                                      |
@@ -34,7 +35,10 @@ What is MCP?
 | **Data Source** | H2 In-Memory Database - Stores product inventory                 |
 
 **Architecture Flow**
-![img_3.png](architecture.png)
+
+<img width="917" height="483" alt="Product Inventory architecture diagram" src="https://github.com/user-attachments/assets/1cc3fd66-a71e-4d6c-a771-329eabbf5036" />
+
+
 
 **Tools & Technologies**
 * Spring Boot - Framework for building the MCP Server
@@ -54,28 +58,14 @@ What is MCP?
 1. Tool Registration
 The @Tool annotation from Spring AI marks methods as callable tools:
 
-`@Service`
-`public class ProductService {`
-`    `
-`    @Tool(description = "Retrieves all products from the inventory database...")`
-`    public String getAllProducts() {`
-`        // Implementation`
-`    }`
-`    `
-`    @Tool(description = "Searches for products by category name...")`
-`    public String searchByCategory(String category) {`
-`        // Implementation`
-`    }`
+<img width="686" height="312" alt="tool registration" src="https://github.com/user-attachments/assets/62d5e9a7-8f76-44d6-ac60-68e58ed1e9a1" />
+
 
 2. Tool Callback Provider
 The McpServerApplication registers the service as a tool provider:
 
-`@Bean`
-`public ToolCallbackProvider productTools(ProductService productService) {`
-`    return MethodToolCallbackProvider.builder()`
-`            .toolObjects(productService)`
-`            .build();`
-`}`
+<img width="685" height="152" alt="toll callback provider" src="https://github.com/user-attachments/assets/9bd3857c-656f-4833-9db3-90737af123f4" />
+
 
 3. MCP Protocol Communication
 The MCP Client in Claude Desktop discovers the registered tools and can call them with appropriate parameters. 
@@ -88,40 +78,55 @@ JSON-RPC: Message format for tool discovery and invocation
 **Available Tools**
 
 1. getAllProducts()
+
 Description: Retrieves all products from the inventory database.
+
 Returns: Formatted list of all products with: Product ID, Name, Category, Price, Stock quantity
+
 Example-
 User: "Show me all products"
 → Claude calls getAllProducts()
 → Returns formatted inventory list
 
-2. searchByCategory(String category)                       
+2. searchByCategory(String category)
+                       
 Description: Searches for products by category name.
+
 Returns: List of products matching the category or "No products found" message.
+
 Example-
 User: "What electronics do we have?"
 → Claude calls searchByCategory("Electronics")
 → Returns matching products
       
-3. addProduct(String name, String category, double price, int stock)
+4. addProduct(String name, String category, double price, int stock)
+
 Description: Adds a new product to the inventory.
+
 Returns: Confirmation message with new product ID.
+
 Example-
 User: "Add a new product: Name=Smartphone, Category=Electronics, Price=699.99, Stock=50"
 → Claude calls addProduct("Smartphone", "Electronics", 699.99, 50)
 → Returns "Product added with ID: 101"
 
-4. updateStock(int productId, int newStock)
+5. updateStock(int productId, int newStock)
+
 Description: Updates the stock quantity of an existing product.
+
 Returns: Confirmation message with updated stock quantity.
+
 Example-
 User: "Update stock for product ID 101 to 30"
 → Claude calls updateStock(101, 30)
 → Returns "Stock updated for product ID 101: New stock = 30"
 
-5. deleteProduct(int productId)
+6. deleteProduct(int productId)
+
 Description: Deletes a product from the inventory.
+
 Returns: Confirmation message of deletion.
+
 Example-
 User: "Delete product with ID 101"
 → Claude calls deleteProduct(101)
@@ -149,20 +154,13 @@ cd spring-ai-mcp-server
 
 **Add the following to your Claude Desktop configuration (claude_desktop_config.json):**
                  
-`{`
-`  "mcpServers": {`
-`    "inventory-server": {`
-`      "command": "java",`
-`      "args": [`
-`        "-jar",`
-`        "path/to/your/spring-ai-mcp-server/target/MCP-Server-0.0.1-SNAPSHOT.jar"`
-`      ]`
-`    }`
-`  }`
-`}`
+<img width="684" height="276" alt="configure claude desktop" src="https://github.com/user-attachments/assets/fa8ff81d-8146-49c3-ab64-a6ad24ab9309" />
+
 
 **Config file locations:**
+
 macOS: ~/Library/Application Support/Claude/claude_desktop_config.json
+
 Windows: %APPDATA%/Claude/claude_desktop_config.json
 
 **How Components Connect**
@@ -173,10 +171,7 @@ The spring-ai-starter-mcp-server dependency provides:
 * Tool Discovery: Exposes @Tool annotated methods to clients
 * STDIO Transport: Handles communication via standard input/output
 
-<dependency>
-    <groupId>org.springframework.ai</groupId>
-    <artifactId>spring-ai-starter-mcp-server</artifactId>
-</dependency>
+implementation 'org.springframework.ai:spring-ai-starter-mcp-server'
 
 2. Tool Annotation Processing
 
@@ -188,5 +183,7 @@ Spring AI scans for @Tool annotations and:
 **Learn More**
 
 Spring AI MCP Documentation: https://docs.spring.io/spring-ai/reference/api/mcp.html
+
 MCP Protocol Specification: https://modelcontextprotocol.io/
+
 Anthropic MCP Guide: https://docs.anthropic.com/en/docs/build-with-claude/mcp
